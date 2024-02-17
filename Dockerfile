@@ -27,6 +27,11 @@ RUN set -ex \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /tmp/* /var/lib/apt/lists/*
+    
+RUN mkdir -p /usr/src/php/ext/redis \
+    && curl -L https://github.com/phpredis/phpredis/archive/refs/tags/6.0.2.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && echo 'redis' >> /usr/src/php-available-exts \
+    && docker-php-ext-install redis
 
 RUN set -ex \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
