@@ -30,6 +30,9 @@ RUN set -ex \
     && apt-get clean \
     && rm -rf /tmp/* /var/lib/apt/lists/*
 
+RUN pecl install redis-5.3.7 \
+    && docker-php-ext-enable redis
+
 RUN set -ex \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && a2enmod remoteip \
