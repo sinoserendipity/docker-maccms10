@@ -25,7 +25,7 @@ RUN set -ex \
         --with-webp \
     && docker-php-ext-install -j$(nproc) gd \
     pecl install redis-5.3.7 \
-    && docker-php-ext-enable redis
+    && docker-php-ext-enable redis \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /tmp/* /var/lib/apt/lists/*
